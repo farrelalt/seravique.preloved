@@ -1,0 +1,89 @@
+# Seravique — Panduan Website
+
+## Struktur File
+```
+seravique/
+├── index.html     → Halaman utama (tidak perlu diubah)
+├── style.css      → Tampilan website (tidak perlu diubah)
+├── app.js         → Logika website (tidak perlu diubah)
+├── products.js    → ⭐ FILE YANG SERING DIEDIT
+└── images/        → Taruh foto produk di sini
+```
+
+---
+
+## Cara Menambah Produk Baru
+
+Buka file `products.js`, scroll ke bawah sampai bagian:
+```
+// ── TAMBAH PRODUK BARU DI SINI ──
+```
+
+Salin template ini dan isi sesuai produkmu:
+```js
+{
+  id: 15,                        // naikkan dari id terakhir
+  name: "Nama Produk",
+  brand: "Nama Brand",
+  category: "tops",              // tops / bottoms / outerwear / dress / set
+  price: 100000,                 // angka saja, tanpa titik
+  condition: "like-new",         // new / like-new / good / fair
+  size: ["S", "M"],              // bisa satu: "M" atau banyak: ["S","M","L"]
+  color: "Warna",
+  desc: "Deskripsi produk.",
+  notes: "Catatan kondisi jujur.",
+  image: "images/foto.jpg",      // kosongkan "" jika belum punya foto
+  featured: false,               // true = tampil di homepage
+},
+```
+
+---
+
+## Cara Menambah Foto
+
+1. Buat folder `images/` di dalam folder seravique
+2. Taruh foto produk di sana (contoh: `produk1.jpg`)
+3. Di `products.js`, isi field `image` dengan path-nya: `"images/produk1.jpg"`
+
+**Tips foto:**
+- Rasio ideal: 3:4 (portrait)
+- Ukuran max: 1MB per foto (compress dulu di tinypng.com)
+- Format: JPG atau PNG
+
+---
+
+## Cara Ganti Nomor WhatsApp
+
+Buka `app.js`, cari baris:
+```js
+window.open(`https://wa.me/628xxxxxxxxxx?text=${msg}`, "_blank");
+```
+Ganti `628xxxxxxxxxx` dengan nomormu (format internasional, tanpa +).
+
+Contoh: nomor 0812-3456-7890 → `6281234567890`
+
+---
+
+## Nilai Kondisi Barang
+
+| Kode      | Label     | Kapan dipakai                         |
+|-----------|-----------|---------------------------------------|
+| new       | Brand New | Belum pernah dipakai, masih ada tag   |
+| like-new  | Like New  | Dipakai 1-2x, kondisi sangat baik     |
+| good      | Good      | Sudah dipakai beberapa kali, bagus    |
+| fair      | Fair      | Ada sedikit tanda pemakaian           |
+
+---
+
+## Tampil di Homepage
+
+Set `featured: true` di produk yang ingin tampil di homepage (maks. 6 produk tampil).
+
+---
+
+## Deploy (Upload ke Internet) Gratis
+
+Bisa pakai salah satu layanan gratis:
+- **Netlify**: netlify.com → drag & drop folder seravique
+- **Vercel**: vercel.com → upload folder
+- **GitHub Pages**: github.com → upload dan aktifkan Pages
