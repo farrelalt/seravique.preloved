@@ -27,6 +27,7 @@ const CATEGORIES = [
 const CONDITIONS = [
     { value: "new", label: "Brand New" },
     { value: "like-new", label: "Like New" },
+    { value: "excellent", label: "Excellent" },
     { value: "good", label: "Good" },
     { value: "fair", label: "Fair" },
 ];

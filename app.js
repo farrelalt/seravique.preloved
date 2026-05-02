@@ -13,6 +13,7 @@ let currentPage = "home";
 
 // ── INIT ───────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
+    initCarousel();
     buildCategoryGrid();
     buildFeaturedGrid();
     buildShopSidebar();
@@ -20,6 +21,68 @@ document.addEventListener("DOMContentLoaded", () => {
     setupSearch();
     updatePriceRange();
 });
+
+// ── CAROUSEL ───────────────────────────────────────────────
+let carouselIndex = 0;
+let carouselTimer = null;
+
+function initCarousel() {
+    const slides = document.querySelectorAll(".carousel-slide");
+    const dotsEl = document.getElementById("carouselDots");
+    if (!slides.length || !dotsEl) return;
+
+    // Buat dots sesuai jumlah slide
+    dotsEl.innerHTML = [...slides].map((_, i) =>
+        `<button class="carousel-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></button>`
+    ).join("");
+
+    // Auto-slide setiap 3.5 detik
+    carouselTimer = setInterval(() => slideCarousel(1), 3500);
+}
+
+function slideCarousel(dir) {
+    const slides = document.querySelectorAll(".carousel-slide");
+    if (!slides.length) return;
+
+    slides[carouselIndex].classList.remove("active");
+    carouselIndex = (carouselIndex + dir + slides.length) % slides.length;
+    slides[carouselIndex].classList.add("active");
+    updateDots();
+    resetTimer();
+}
+
+function goToSlide(index) {
+    const slides = document.querySelectorAll(".carousel-slide");
+    if (!slides.length) return;
+    slides[carouselIndex].classList.remove("active");
+    carouselIndex = index;
+    slides[carouselIndex].classList.add("active");
+    updateDots();
+    resetTimer();
+}
+
+function updateDots() {
+    document.querySelectorAll(".carousel-dot").forEach((dot, i) => {
+        dot.classList.toggle("active", i === carouselIndex);
+    });
+}
+
+function resetTimer() {
+    clearInterval(carouselTimer);
+    carouselTimer = setInterval(() => slideCarousel(1), 3500);
+}
+
+// Swipe support (mobile)
+(function () {
+    let startX = 0;
+    document.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener("touchend", e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        const carousel = document.querySelector(".hero-carousel");
+        if (!carousel) return;
+        if (Math.abs(diff) > 40) slideCarousel(diff > 0 ? 1 : -1);
+    }, { passive: true });
+})();
 
 // ── NAVIGATION ─────────────────────────────────────────────
 function showPage(page) {
@@ -392,14 +455,14 @@ function orderViaWA(id) {
         `• Harga  : ${formatRupiah(p.price)}\n\n` +
         `Apakah masih tersedia? Terima kasih!`
     );
-    // Ganti nomor WA di bawah ini (format: 6281217883105)
-    window.open(`https://wa.me/6281217883105?text=${msg}`, "_blank");
+    // Ganti nomor WA di bawah ini (format: 628xxxxxxxxxx)
+    window.open(`https://wa.me/628xxxxxxxxxx?text=${msg}`, "_blank");
 }
 
 function orderViaTikTok(id) {
     // Ganti URL di bawah ini dengan link TikTok Shop tokomu
-    // Contoh: https://www.tiktok.com/@seravique.trift/shop
-    window.open(`https://www.tiktok.com/@seravique.trift`, "_blank");
+    // Contoh: https://www.tiktok.com/@seravique/shop
+    window.open(`https://www.tiktok.com/@seravique`, "_blank");
 }
 
 function checkout() {
@@ -407,8 +470,8 @@ function checkout() {
     const lines = cart.map(x => `• ${x.name} (${x.brand}) - ${formatRupiah(x.price)}`).join("\n");
     const total = cart.reduce((s, x) => s + x.price * x.qty, 0);
     const msg = encodeURIComponent(`Halo Seravique! Saya ingin order:\n\n${lines}\n\nTotal: ${formatRupiah(total)}\n\nMohon info ketersediaan dan pengiriman. Terima kasih!`);
-    // Ganti nomor WA di bawah ini dengan nomormu (format: 6281217883105)
-    window.open(`https://wa.me/6281217883105?text=${msg}`, "_blank");
+    // Ganti nomor WA di bawah ini dengan nomormu (format: 628xxxxxxxxxx)
+    window.open(`https://wa.me/628xxxxxxxxxx?text=${msg}`, "_blank");
 }
 
 // ── TOAST ──────────────────────────────────────────────────

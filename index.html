@@ -13,9 +13,7 @@
 
 <body>
 
-    <!-- ============================================================
-       NAVBAR
-  ============================================================ -->
+    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="nav-inner">
             <a class="nav-logo" href="#" onclick="showPage('home')">Seravique</a>
@@ -53,7 +51,6 @@
                 </button>
             </div>
         </div>
-        <!-- Search Bar -->
         <div class="search-bar" id="searchBar">
             <div class="search-inner">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
@@ -64,7 +61,6 @@
                 <button onclick="closeSearch()">✕</button>
             </div>
         </div>
-        <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
             <a href="#" onclick="showPage('home'); toggleMobileMenu()">Home</a>
             <a href="#" onclick="showPage('shop'); toggleMobileMenu()">Shop</a>
@@ -72,9 +68,7 @@
         </div>
     </nav>
 
-    <!-- ============================================================
-       PAGE: HOME
-  ============================================================ -->
+    <!-- PAGE: HOME -->
     <div id="page-home">
 
         <!-- HERO -->
@@ -89,13 +83,58 @@
                     <button class="btn-ghost" onclick="scrollToSection('categories')">Lihat Kategori</button>
                 </div>
             </div>
+
             <div class="hero-visual">
-                <div class="hero-img-wrap">
-                    <div class="hero-img-placeholder">
-                        <span>Foto Hero</span>
-                        <small>Ganti dengan foto utama tokomu</small>
+                <div class="hero-carousel">
+
+                    <!-- =============================================
+                         FOTO CAROUSEL PRODUK BARU
+                         Cara tambah foto:
+                         1. Taruh foto di folder images/
+                         2. Salin blok di bawah
+                         3. Ganti src dan teks caption-nya
+                    ============================================= -->
+
+                    <div class="carousel-slide active">
+                        <img src="images/newproduct.PNG" alt="New Product 1" />
+                        <div class="slide-caption">New In — Benang Jarum</div>
                     </div>
-                    <div class="hero-badge">New In</div>
+
+                    <div class="carousel-slide">
+                        <img src="images/newproduct2.PNG" alt="New Product 2" />
+                        <div class="slide-caption">New In — Wide Leg Pants</div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <img src="images/newproduct3.PNG" alt="New Product 3" />
+                        <div class="slide-caption">New In — Midi Dress</div>
+                    </div>
+
+                    <!-- Tambah slide baru di sini:
+                    <div class="carousel-slide">
+                        <img src="images/newproduct4.PNG" alt="New Product 4" />
+                        <div class="slide-caption">New In — Nama Produk</div>
+                    </div>
+                    -->
+
+                    <!-- ============================================= -->
+
+
+
+                    <button class="carousel-btn prev" onclick="slideCarousel(-1)" aria-label="Sebelumnya">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                    </button>
+                    <button class="carousel-btn next" onclick="slideCarousel(1)" aria-label="Berikutnya">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </button>
+
+                    <div class="carousel-dots" id="carouselDots"></div>
                 </div>
             </div>
         </section>
@@ -155,17 +194,13 @@
 
     </div><!-- end page-home -->
 
-    <!-- ============================================================
-       PAGE: SHOP
-  ============================================================ -->
+    <!-- PAGE: SHOP -->
     <div id="page-shop" style="display:none">
         <div class="shop-header">
             <h1>Shop All</h1>
             <p>Semua koleksi preloved Seravique</p>
         </div>
-
         <div class="shop-layout">
-            <!-- Sidebar Filter -->
             <aside class="sidebar">
                 <div class="filter-block">
                     <h3>Kategori</h3>
@@ -192,8 +227,6 @@
                 </div>
                 <button class="btn-ghost full-width" onclick="resetFilters()">Reset Filter</button>
             </aside>
-
-            <!-- Product Area -->
             <main class="shop-main">
                 <div class="shop-toolbar">
                     <span id="productCount" class="product-count"></span>
