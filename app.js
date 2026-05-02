@@ -277,6 +277,11 @@ function openModal(id) {
         <p class="label">Deskripsi</p>
         <p>${p.desc || "-"}</p>
       </div>
+      ${p.sizeGuide ? `
+      <div class="modal-size-guide">
+        <p class="label">Panduan Ukuran</p>
+        <p>${p.sizeGuide}</p>
+      </div>` : ""}
       <div class="modal-notes">
         <p class="label">Catatan Kondisi</p>
         <p>${p.notes || "-"}</p>
@@ -387,13 +392,13 @@ function orderViaWA(id) {
         `• Harga  : ${formatRupiah(p.price)}\n\n` +
         `Apakah masih tersedia? Terima kasih!`
     );
-    // Ganti nomor WA di bawah ini (format: 628xxxxxxxxxx)
-    window.open(`https://wa.me/628121788310?text=${msg}`, "_blank");
+    // Ganti nomor WA di bawah ini (format: 6281217883105)
+    window.open(`https://wa.me/6281217883105?text=${msg}`, "_blank");
 }
 
 function orderViaTikTok(id) {
     // Ganti URL di bawah ini dengan link TikTok Shop tokomu
-    // Contoh: https://www.tiktok.com/@seravique/shop
+    // Contoh: https://www.tiktok.com/@seravique.trift/shop
     window.open(`https://www.tiktok.com/@seravique.trift`, "_blank");
 }
 
@@ -402,7 +407,7 @@ function checkout() {
     const lines = cart.map(x => `• ${x.name} (${x.brand}) - ${formatRupiah(x.price)}`).join("\n");
     const total = cart.reduce((s, x) => s + x.price * x.qty, 0);
     const msg = encodeURIComponent(`Halo Seravique! Saya ingin order:\n\n${lines}\n\nTotal: ${formatRupiah(total)}\n\nMohon info ketersediaan dan pengiriman. Terima kasih!`);
-    // Ganti nomor WA di bawah ini dengan nomormu (format: 628xxxxxxxxxx)
+    // Ganti nomor WA di bawah ini dengan nomormu (format: 6281217883105)
     window.open(`https://wa.me/6281217883105?text=${msg}`, "_blank");
 }
 

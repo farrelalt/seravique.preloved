@@ -1040,6 +1040,23 @@ em {
     line-height: 1.7;
 }
 
+.modal-size-guide {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: .85rem 1rem;
+}
+
+.modal-size-guide p:first-child {
+    margin-bottom: .4rem;
+}
+
+.modal-size-guide p:last-child {
+    font-size: .82rem;
+    color: var(--mid);
+    line-height: 1.75;
+}
+
 .modal-notes p {
     color: var(--mid);
     font-size: .82rem;
